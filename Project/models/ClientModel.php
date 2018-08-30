@@ -27,10 +27,10 @@
      * Gets all the users from the database;
      */
      public function getAllClients() {
-       $query = 'SELECT * FROM ' . $table;
+       $query = 'SELECT * FROM ' . $this->table;
        $stmt = $this->conn->prepare($query);
        $stmt->execute();
-       return $stmt;
+       return $stmt->fetch(PDO::FETCH_ASSOC);;
      }
 
      /**
@@ -38,11 +38,12 @@
       * a class property.
       */
      public function getClientByUsername() {
-       $query = 'SELECT * FROM ' . $table . 'WHERE username = ?';
+       $query = 'SELECT * FROM ' . $this->table . ' WHERE username = ?';
        $stmt = $this->conn->prepare($query);
        $stmt->bindParam(1, $this->username);
        $stmt->execute();
-       return $stmt;
+       $row = $stmt->fetch(PDO::FETCH_ASSOC);
+       return $row;
      }
 
      /**
@@ -59,4 +60,14 @@
        printf("Error: %s.\n", $stmt->error);
        return false;
      }
+
+     /**
+      * Check if user matches password;
+      */
+    public function checkUserLogin() {
+      $fetchedUser = $this->getClientByUsername();
+      $trueHash = $fetchedUser['password'];
+      $this->id = $fetchedUser['id'];
+      return password_verify($this->password, $trueHash);
+    }
   }

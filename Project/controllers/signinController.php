@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include_once '../config/Database.php';
   include_once '../models/ClientModel.php';
 
@@ -11,6 +12,12 @@
   $client->username = $_POST['username'];
   $client->password = $_POST['password'];
 
-  // TODO: Redirect page.
-  if($client->createClient()) echo 'Cliente creado exitosamente';
-  else echo 'Error al crear el cliente';
+  if($client->checkUserLogin()) {
+    if(!isset($_SESSION['username'])) {
+      $_SESSION['username'] = $client->username;
+      $_SESSION['user_id'] = $client->id;
+    }
+    header('Location: ../views/profile.php');
+  } else {
+    echo 'Access Denied';
+  }
