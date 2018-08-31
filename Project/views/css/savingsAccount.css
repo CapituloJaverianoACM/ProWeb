@@ -2,7 +2,11 @@
   max-width: 960px;
 }
 
-button {
+.option-btn  {
   margin-top: 10px;
+  width: 100%;
+}
+
+.submit-btn {
   width: 100%;
 }

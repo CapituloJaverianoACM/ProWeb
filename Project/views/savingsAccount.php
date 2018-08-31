@@ -1,6 +1,12 @@
 <?php
-  session_start();
+  include_once '../controllers/savingsAccountController.php';
   $accounts = $_SESSION['savings_accounts'];
+  $jsScript = "";
+  if(isset($_SESSION['response'])) {
+    $jsScript .= '<script> alert("' .$_SESSION['response']. '")</script>';
+    echo $jsScript;
+    unset($_SESSION['response']);
+  }
 ?>
 
 <!doctype html>
@@ -26,30 +32,34 @@
         <a class="p-2 text-dark" href="#">Support</a>
         <a class="p-2 text-dark" href="#">Pricing</a>
       </nav>
-      <a class="btn btn-outline-primary" href="#">Sign up</a>
+      <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
     </div>
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">Tus Cuentas de Ahorro</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+        in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+        officia deserunt mollit anim id est laborum.</p>
     <div class="container">
 
 
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">ID</th>
+            <th scope="col">Account ID</th>
             <th scope="col">Balance</th>
             <th scope="col">Tasa de Interes</th>
           </tr>
         </thead>
         <tbody>
           <?php
-          print_r($accounts);
-          echo "<br>";
             foreach ($accounts as $key => $value) {
               echo '<tr>';
-                echo "<th scope="row">".$accounts[$key]['id']."</th>";
+                echo '<th scope="row">'.$accounts[$key]['id']."</th>";
                 echo "<td> $ ".number_format($accounts[$key]['balance'],2)." JC </td>";
                 echo "<td>".number_format($accounts[$key]['interest_rate'],2)."</td>";
               echo '</tr>';
@@ -57,7 +67,15 @@
           ?>
         </tbody>
       </table>
-        <button type="button" class="btn btn-success">Crear Cuenta Ahorros</button>
+        <div class="row">
+          <div class="col-6">
+            <a class="option-btn btn btn-warning" href="./withdraw.php">Retirar</a>
+          </div>
+          <div class="col-6">
+            <a class="option-btn btn btn-primary">Consignar</a>
+          </div>
+        </div>
+        <a class="option-btn btn btn-success" href="./createSavingsAccount.php">Crear Cuenta Ahorros</a>
       </div>
     </div>
 
