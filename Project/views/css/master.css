@@ -1,0 +1,17 @@
+.container {
+  max-width: 1400px;
+}
+
+.option-btn  {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  width: 100%;
+}
+
+h4 {
+  color: white;
+}

@@ -1,3 +1,9 @@
+<?php
+  include_once '../controllers/adminController.php';
+  $credits = $_SESSION['all_credits'];
+  $credit_cards = $_SESSION['all_credit_cards'];
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,12 +30,49 @@
     </div>
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Pricing</h1>
-      <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
+      <h1 class="display-4">Administración de Creditos y Tarjetas de Credito</h1>
+      <p class="lead">Aquí podras aprobar o editar las solicitudes hechas por los clientes.</p>
     </div>
 
     <div class="container">
+      <form class="form" action="../controllers/adminController.php" method="post">
+        <div class="row">
+          <div class="col-6">
+            <label for="cc">ID Credito</label>
+            <select placeholder="ID Credito" name="credit_id" class="form-control" id="sel1" required>
+              <?php
+                foreach ($credits as $key => $value) {
+                  $id = $value['id'];
+                  echo '<option>'. $id .'</option>';
+                }
+              ?>
+            </select>
+          </div>
+          <div class="col-6">
+            <button type="submit" class="submit-btn btn btn-warning">Ver Solicitud</button>
+          </div>
 
+        </div>
+      </form>
+      <form class="form" action="../controllers/adminController.php" method="post">
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="cc">ID Tarjeta Credito</label>
+            <select placeholder="ID Tarjeta" name="credit_id" class="form-control" id="cc" required>
+              <?php
+                foreach ($credit_cards as $key => $value) {
+                  $id = $value['id'];
+                  echo '<option>'. $id .'</option>';
+                }
+              ?>
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <button type="submit" class="submit-btn btn btn-warning">Ver Solicitud</button>
+          </div>
+
+        </div>
+      </form>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

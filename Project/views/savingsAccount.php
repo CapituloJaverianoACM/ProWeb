@@ -25,7 +25,7 @@
   <body>
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+      <h5 class="my-0 mr-md-auto font-weight-normal">J&A Bank</h5>
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#">Features</a>
         <a class="p-2 text-dark" href="#">Enterprise</a>
@@ -72,7 +72,7 @@
             <a class="option-btn btn btn-warning" href="./withdraw.php">Retirar</a>
           </div>
           <div class="col-6">
-            <a class="option-btn btn btn-primary">Consignar</a>
+            <a class="option-btn btn btn-primary" href="./consign.php">Consignar</a>
           </div>
         </div>
         <a class="option-btn btn btn-success" href="./createSavingsAccount.php">Crear Cuenta Ahorros</a>

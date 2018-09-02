@@ -40,19 +40,19 @@
             <i class="fas fa-9x fa-piggy-bank ico-color-pig"></i>
             <h2>Cuenta de Ahorros</h2>
             <p>Haz click aqui para ver y administrar tus cuentas de ahorros.</p>
-            <p><a class="btn btn-primary" href="../controllers/savingsAccountController.php" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-primary" href="./savingsAccount.php" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <i class="fas fa-9x fa-dollar-sign ico-color-credit"></i>
             <h2>Crédito</h2>
             <p>Haz click aqui para ver o solicitar tus creditos.</p><br>
-            <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-primary" href="./credits.php" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <i class="fas fa-9x fa-credit-card ico-color-tc"></i>
             <h2>Tarjeta de Crédito</h2>
             <p>Haz click aqui para ver y administrar tus tarjetas de crédito.</p>
-            <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-primary" href="./creditCard.php" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
     </div>

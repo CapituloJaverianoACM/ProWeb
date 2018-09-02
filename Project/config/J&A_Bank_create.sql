@@ -14,21 +14,23 @@ CREATE TABLE client (
 
 -- Table: credit
 CREATE TABLE credit (
-    interest_rate decimal(40,10) NOT NULL,
+    interest_rate decimal(40,10) NOT NULL DEFAULT 0.02,
     pay_date date NOT NULL,
     loan_amount decimal(40,10) NOT NULL,
     balance decimal(40,10) NOT NULL,
     isAproved BOOLEAN NOT NULL DEFAULT 0,
     late_payment_fee decimal(40,10) NOT NULL,
     id int NOT NULL AUTO_INCREMENT,
-    guest_email varchar(100) NOT NULL,
-    user_id int NOT NULL,
+    guest_email varchar(100),
+    user_id int,
     CONSTRAINT credit_pk PRIMARY KEY (id)
 );
 
 -- Table: credit_card
 CREATE TABLE credit_card (
     max_capacity decimal(40,10) NOT NULL,
+    isAproved BOOLEAN NOT NULL DEFAULT 0,
+    consumed decimal(40,10) NOT NULL,
     overbook decimal(40,10) NOT NULL,
     handling_fee decimal(40,10) NOT NULL,
     interest_rate decimal(40,10) NOT NULL,
@@ -40,6 +42,7 @@ CREATE TABLE credit_card (
 -- Table: credit_card_purchase
 CREATE TABLE credit_card_purchase (
     number_fees int NOT NULL,
+    amount int NOT NULL,
     isJavecoins BOOLEAN NOT NULL DEFAULT 1 COMMENT 'This is either pesos or javelins',
     id int NOT NULL AUTO_INCREMENT,
     credit_card_id int NOT NULL,
@@ -70,7 +73,7 @@ CREATE TABLE movement (
     transfer_cost decimal(50,10) NOT NULL DEFAULT 0.0,
     date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     id int NOT NULL AUTO_INCREMENT,
-    savings_account_id int NOT NULL,
+    savings_account_id int,
     CONSTRAINT movement_pk PRIMARY KEY (id)
 );
 

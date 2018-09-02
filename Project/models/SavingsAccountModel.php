@@ -1,10 +1,10 @@
 <?php
   include_once 'Utility.php';
 
-/**
- * Class that represents the table savings_account in the data base.
- * this class retrives and writes to the DB.
- */
+ /**
+  * Class that represents the table savings_account in the data base.
+  * this class retrives and writes to the DB.
+  */
   class SavingsAccountModel {
 
     private $conn;
@@ -36,6 +36,22 @@
       return $result;
     }
 
+    /**
+     * Gets all accounts.
+     */
+    public function getAllAccounts() {
+      $query = 'SELECT * FROM ' . $this->table;
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':user_id', $this->user_id);
+      $stmt->execute();
+      $result = Utility::stmtToArray($stmt);
+      return $result;
+    }
+
+    /**
+     * Creates a new savings account with the values
+     * assigned to this class properties.
+     */
     public function createSavingsAccount() {
       $query = 'INSERT INTO ' . $this->table . '
                 SET
@@ -51,6 +67,9 @@
       return false;
     }
 
+    /**
+     * Updates the row with the setted with the current atributes.
+     */
     public function updateAccount() {
       $query = 'UPDATE ' . $this->table . '
                 SET
@@ -67,6 +86,10 @@
       return false;
     }
 
+    /**
+     * Gets from the database the savings account that matches
+     * the id provided.
+     */
     public function getSavingAccountById() {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE id = :id';
         $stmt = $this->conn->prepare($query);
