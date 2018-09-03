@@ -74,7 +74,8 @@ CREATE TABLE movement (
     date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     id int NOT NULL AUTO_INCREMENT,
     savings_account_id int,
-    destiny_account int,
+    destiny int,
+    foreign_account_id int,
     CONSTRAINT movement_pk PRIMARY KEY (id)
 );
 
@@ -116,6 +117,5 @@ ALTER TABLE savings_account ADD CONSTRAINT savings_account_user FOREIGN KEY savi
 ALTER TABLE movement ADD CONSTRAINT transaction_savings_account FOREIGN KEY transaction_savings_account (savings_account_id)
     REFERENCES savings_account (id);
 
-ALTER TABLE `movement` ADD CONSTRAINT `transaction_destiny_savings_account` FOREIGN KEY (`destiny_account`) REFERENCES `savings_account`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- End of file.

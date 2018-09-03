@@ -22,7 +22,8 @@
   $movement->savings_account_id = $account_origin->id;
   $movement->type_transfer = (isset($_POST['destiny_account_id'])) ? TypeTransferEnum::ConsignSavingsAccount : TypeTransferEnum::ConsignCredit;
   $movement->type_transfer = (isset($_POST['account_to_consign'])) ? TypeTransferEnum::CashConsign : $movement->type_transfer;
-  $movement->createMovement();
+
+  $error = true;
 
   if(isset($_POST['destiny_account_id'])) {
     $account_destiny->id = $_POST['destiny_account_id'];
@@ -32,7 +33,8 @@
       $account_destiny->balance += $movement->amount;
       $account_origin->updateAccount();
       $account_destiny->updateAccount();
-      $_SESSION['response'] = 'Retiro efectuaxo exitosamente';
+      $_SESSION['response'] = 'Retiro efectuado exitosamente';
+      $error = false;
     } else {
       $_SESSION['response'] = 'Saldo insuficiente';
     }
@@ -47,6 +49,7 @@
       $account_origin->updateAccount();
       $credit->updateCredit();
       $_SESSION['response'] = 'Retiro efectuado exitosamente';
+      $error = false;
     } else {
       $_SESSION['response'] = 'Saldo insuficiente';
     }
@@ -59,4 +62,8 @@
     $account_origin->updateAccount();
     $_SESSION['response'] = 'Consignacion efectuado exitosamente';
   }
+
+  if( !$error )
+    $movement->createMovement();
+
   header('Location: ../views/savingsAccount.php');
