@@ -102,4 +102,16 @@
         return $result;
     }
 
+    /**
+     * Deletes from the database the savings account that matches
+     * the id provided.
+     */
+    public function deleteSavingAccoutById(){
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        if($stmt->execute()) return true;
+        return false;
+    }
+
   }
