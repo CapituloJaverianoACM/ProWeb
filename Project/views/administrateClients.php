@@ -1,11 +1,7 @@
 <?php
-$_SESSION['isAdmin'] = true;
-if( !$_SESSION['isAdmin'] )
-{
-    header('Location: ../views/signin.php');
-}
-include_once '../controllers/savingsAccountController.php';
-$accounts = $_SESSION['all_savings_accounts'];
+include_once '../controllers/administrateClientsController.php';
+$all_clients = $_SESSION['all_clients'];
+unset($_SESSION['all_clients']);
 ?>
 
 <!doctype html>
@@ -20,7 +16,7 @@ $accounts = $_SESSION['all_savings_accounts'];
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/savingsAccount.css">
 
-    <title>Administrate Savings Account</title>
+    <title>Administrate Users</title>
 </head>
 <body>
 
@@ -35,33 +31,29 @@ $accounts = $_SESSION['all_savings_accounts'];
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>
 
-<div class="container text-center">
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Administrar cuentas ahorros</h1>
-    </div>
-    <form class="form" action="../controllers/adminSavingsAccountsController.php" method="post">
-        <div class="row">
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Administrar Usuarios</h1>
+    <p class="lead">Selecciona el usuario que quieres administrar.</p>
+</div>
 
-            <div class="col-8">
-                <select placeholder="Cuenta de Ahorros" name="account_id" class="form-control" id="sel1" required>
+<div class="container">
+    <form class="form" action="../controllers/administrateClientsController.php" method="post">
+        <div class="row">
+            <div class="col-8 form-group">
+                <select placeholder="ID del Usuario" name="username" class="form-control" id="sel1" required>
                     <?php
-                    foreach ($accounts as $key => $value) {
-                        $id = $value['id'];
+                    foreach ($all_clients as $key => $value) {
+                        $id = $value['username'];
                         echo '<option>'. $id .'</option>';
                     }
                     ?>
                 </select>
             </div>
-            <div class="col-2">
-                <button type="submit" class="submit-btn btn btn-warning">Eliminar</button>
+            <div class="col-4 form-group">
+                <button type="submit" class="submit-btn btn btn-warning">Administrar</button>
             </div>
-
         </div>
     </form>
-</div>
-
-<div class="container">
-
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -60,11 +60,11 @@ print_r($credit);
         </div>
 
         <?php
-            if(isset($credit['$guest_email'])) {
+            if(isset($credit['guest_email'])) {
                 $html = ' 
                     <div class="form-group">
                         <label for="max_capacity">Email del Dueño</label>
-                        <input readonly type="number" class="form-control" name="guest_email" value="' .$credit['guest_email']. '"required>
+                        <input readonly type="email" class="form-control" name="guest_email" value="' .$credit['guest_email']. '"required>
                     </div>';
                 echo $html;
             } else {

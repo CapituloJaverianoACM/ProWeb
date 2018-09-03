@@ -80,6 +80,7 @@ if (isset($_SESSION['response'])) {
         </div>
         <button type="submit" class="submit-btn btn btn-primary">Actualizar Valor</button>
     </form>
+    <a class="submit-btn btn btn-info" href="administrateClients.php" role="button">Administrar Usuarios</a>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
