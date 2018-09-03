@@ -95,6 +95,7 @@
         $this->interest_rate = $result[0]['interest_rate'];
         $this->user_id = $result[0]['user_id'];
         $this->consumed = $result[0]['consumed'];
+        $this->isAproved = $result[0]['isAproved'];
         return $result;
     }
 
@@ -139,5 +140,18 @@
         return $result;
 
     }
+
+      /**
+       * Gets the aproved credit cards.
+       */
+
+      public function getAprovedCreditCards() {
+          $query = 'SELECT * FROM ' . $this->table . ' WHERE isAproved = 1';
+          $stmt = $this->conn->prepare($query);
+          $stmt->execute();
+          $result = Utility::stmtToArray($stmt);
+          return $result;
+
+      }
 
   }

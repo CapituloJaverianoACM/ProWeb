@@ -9,4 +9,5 @@
 
   $credit_card = new CreditCardModel($db);
   $credit_card->user_id = $_SESSION['user_id'];
-  $_SESSION['creditCards'] = $credit_card->getClientCreditCards();
+  $_SESSION['approved_credit_cards'] = $credit_card->getAprovedCreditCards();
+  $_SESSION['all_credit_cards'] = $credit_card->getClientCreditCards();

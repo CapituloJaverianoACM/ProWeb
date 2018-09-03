@@ -1,5 +1,4 @@
 <?php
-$_SESSION['isAdmin'] = true;
 if( !$_SESSION['isAdmin'] )
 {
     header('Location: ../views/signin.php');
@@ -32,6 +31,7 @@ $accounts = $_SESSION['all_savings_accounts'];
         <a class="p-2 text-dark" href="./credits.php">Creditos</a>
         <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
         <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+        <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
     </nav>
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>

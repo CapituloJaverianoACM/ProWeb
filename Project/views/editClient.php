@@ -27,6 +27,7 @@ $username_to_edit = $_SESSION['user_to_edit'];
         <a class="p-2 text-dark" href="./credits.php">Creditos</a>
         <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
         <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+        <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
     </nav>
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>
@@ -45,10 +46,6 @@ $username_to_edit = $_SESSION['user_to_edit'];
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" name="username" form-control" value="<?php echo $username_to_edit['username']; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="username">Password</label>
-            <input type="password"  name="password" class="form-control" value="<?php echo $username_to_edit['password']; ?>" required>
         </div>
 
         <div class="row">

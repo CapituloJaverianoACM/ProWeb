@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/master.css">
 
-    <title>Create Savings Account</title>
+    <title>Consignar</title>
   </head>
   <body>
 
@@ -29,13 +29,14 @@
           <a class="p-2 text-dark" href="./credits.php">Creditos</a>
           <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
           <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+          <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
       </nav>
       <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
     </div>
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Pricing</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h1 class="display-4">Consignar</h1>
+      <p>Selecciona la cuenta y el destino para consignar</p>
     </div>
 
     <div class="container">
@@ -98,7 +99,7 @@
             <label for="origin">Consignar Dinero</label>
             <label for="amount">Monto a Consignar</label>
             <input type="number" name="amount" id="amount" placeholder="Monto" class="form-control" required>
-            <label for="origin">Crédito de Destino</label>
+            <label for="origin">Cuenta de Destino</label>
             <select name="account_to_consign" class="form-control" id="origin" required>
               <?php
                 foreach ($accounts as $key => $value) {

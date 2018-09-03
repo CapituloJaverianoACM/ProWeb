@@ -31,6 +31,7 @@ $users = $client->getAllClients();
         <a class="p-2 text-dark" href="#">Enterprise</a>
         <a class="p-2 text-dark" href="#">Support</a>
         <a class="p-2 text-dark" href="#">Pricing</a>
+        <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
     </nav>
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>

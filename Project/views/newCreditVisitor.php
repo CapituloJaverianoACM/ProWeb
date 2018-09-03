@@ -1,3 +1,13 @@
+<?php
+include_once '../controllers/creditController.php';
+$credits = $_SESSION['credits'];
+$jsScript = "";
+if(isset($_SESSION['response'])) {
+    $jsScript .= '<script> alert("' .$_SESSION['response']. '")</script>';
+    echo $jsScript;
+    unset($_SESSION['response']);
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,11 +26,10 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">J&A Bank</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="./profile.php">Perfil</a>
-        <a class="p-2 text-dark" href="./savingsAccount.php">Cuenta de Ahorros</a>
-        <a class="p-2 text-dark" href="./credits.php">Creditos</a>
-        <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
-        <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+        <a class="p-2 text-dark" href="./profileVisitor.php">Perfil</a>
+        <a class="p-2 text-dark" href="./signup.php">Cuenta de Ahorros</a>
+        <a class="p-2 text-dark" href="../views/newCreditVisitor.php">Creditos</a>
+        <a class="p-2 text-dark" href="./signup.php">Tarjetas de Creditos</a>
     </nav>
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>
@@ -66,6 +75,33 @@
 
         </div>
     </div>
+    <a class="btn btn-lg btn-info" href="./payCreditAsGuest.php">Pagar Credito</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Monto del Crédito</th>
+            <th scope="col">Tasa de Interes</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        echo "<br>";
+        foreach ($credits as $key => $value) {
+            echo '<tr>';
+            $state = $credits[$key]['isAproved'] ? "Aprovado" : "No Aprovado";
+            echo '<th scope="row">'.$credits[$key]['id']."</th>";
+            echo "<td> $ ".number_format($credits[$key]['loan_amount'],2)." JC </td>";
+            echo "<td>".number_format($credits[$key]['interest_rate'],2)."</td>";
+            echo "<td>".number_format($credits[$key]['balance'],2)."</td>";
+            echo "<td>".$state."</td>";
+            echo '</tr>';
+        }
+        ?>
+        </tbody>
+    </table>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

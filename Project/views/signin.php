@@ -25,19 +25,20 @@ if (isset($_SESSION['response'])) {
 <form class="form-signin" method="post" action="../controllers/signinController.php">
     <img class="mb-4" src="./assets/logo2.png" alt="" width="130">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" autofocus>
-    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
+    <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" autofocus required>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
     <button name="client" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <a href="./signup.php" class="btn btn-lg btn-warning btn-block">Sign Up</a>
 </form>
 <div class="container form-signin">
     <form class="form" method="post" action="../controllers/signinController.php">
         <img class="mb-4" src="./assets/logo2.png" alt="" width="130">
         <h1 class="h3 mb-3 font-weight-normal">Continuar Como Invitado</h1>
         <div class="form-group">
-            <input type="number" id="inputPassword" name="cedula" class="form-control" placeholder="Cedula">
-            <input type="email" id="inputEmail" name="guest_email" class="form-control" placeholder="Email">
+            <input type="number" id="inputPassword" name="cedula" class="form-control" placeholder="Cedula" required>
+            <input type="email" id="inputEmail" name="guest_email" class="form-control" placeholder="Email" required>
             <br>
-            <button name="guest" class="btn btn-lg btn-warning btn-block" type="submit">Conituar Como Invitado</button>
+            <button name="guest" class="btn btn-lg btn-info btn-block" type="submit">Conituar Como Invitado</button>
         </div>
     </form>
 </div>

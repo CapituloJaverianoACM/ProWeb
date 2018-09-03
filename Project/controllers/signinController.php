@@ -14,6 +14,8 @@ $guest = new GuestModel($db);
 $admin_constant = new AdminConstant($db);
 
 $_SESSION['guest_credit_fee'] = $admin_constant->getGuestCreditFee();
+$_SESSION['default_savings_interest'] = $admin_constant->getSavingsInterestRate();
+$_SESSION['transfer_cost'] = $admin_constant->getTransferCost();
 
 if (isset($_POST['client']) and $_POST['username'] != null) {
     $client->username = $_POST['username'];
@@ -35,7 +37,8 @@ if (isset($_POST['guest'])) {
     $guest->email = $_POST['guest_email'];
     $_SESSION['cedula'] = $_POST['cedula'];
     $_SESSION['guest_email'] = $_POST['guest_email'];
-    $guest->createGuest();
+    if(!$guest->isEmailRegister())
+        $guest->createGuest();
     header('Location: ../views/profileVisitor.php');
 }
 

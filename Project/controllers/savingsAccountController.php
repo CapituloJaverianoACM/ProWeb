@@ -16,4 +16,4 @@
   $_SESSION['savings_accounts'] = $account->getAllClientsAccounts();
 
   $credit->user_id = $_SESSION['user_id'];
-  $_SESSION['client_credits'] = $credit->getAllClientsCredits();
+  $_SESSION['client_credits'] = $credit->getClientsAprovedCredits();

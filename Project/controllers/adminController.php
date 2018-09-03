@@ -28,11 +28,15 @@ if(isset($_POST['credit_card_id'])) {
     header('Location: ../views/creditCardApplication.php ');
 }
 
-if(isset($_POST['guest_credit_fee'])) {
+if(isset($_POST['admin_constants'])) {
     $admin_constant->guest_credit_fee = $_POST['guest_credit_fee'];
+    $admin_constant->transfer_cost = $_POST['transfer_cost'];
+    $admin_constant->default_savings_interest = $_POST['default_savings_interest'];
     print_r($_POST);
-    if($admin_constant->setGuestCreditFee()) {
+    if($admin_constant->updateConstants()) {
         $_SESSION['guest_credit_fee'] = $_POST['guest_credit_fee'];
+        $_SESSION['transfer_cost'] = $_POST['transfer_cost'];
+        $_SESSION['default_savings_interest'] = $_POST['default_savings_interest'];
     }
     unset($_POST['guest_credit_fee']);
     $_SESSION['response'] = 'Cambio efectuado';

@@ -1,6 +1,6 @@
 <?php
   include_once '../controllers/creditCardController.php';
-  $credit_cards = $_SESSION['creditCards'];
+  $credit_cards = $_SESSION['approved_credit_cards'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,6 +25,7 @@
           <a class="p-2 text-dark" href="./credits.php">Creditos</a>
           <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
           <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+          <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
       </nav>
       <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
     </div>

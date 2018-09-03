@@ -26,6 +26,7 @@
           <a class="p-2 text-dark" href="./credits.php">Creditos</a>
           <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
           <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+          <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
       </nav>
       <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
     </div>
@@ -34,8 +35,8 @@
     <div class="container text-center">
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">Crear Cuenta de Ahorros</h1>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
+        <p class="lead">Ingresa el monto por el que quieres abrir tu cuenta de ahorros.</p>
+        </div>
       <form class="form" action="../controllers/createSavingsAccountController.php" method="post">
         <div class="row">
           <div class="col-6">

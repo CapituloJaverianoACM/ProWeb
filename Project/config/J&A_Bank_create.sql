@@ -89,37 +89,49 @@ CREATE TABLE savings_account (
     CONSTRAINT savings_account_pk PRIMARY KEY (id)
 );
 
+-- Table: admin_constant
+CREATE TABLE admin_constant (
+    guest_credit_fee int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT
+);
+
 -- foreign keys
 -- Reference: credit_card_purchase_credit_card (table: credit_card_purchase)
 ALTER TABLE credit_card_purchase ADD CONSTRAINT credit_card_purchase_credit_card FOREIGN KEY credit_card_purchase_credit_card (credit_card_id)
-    REFERENCES credit_card (id);
+    REFERENCES credit_card (id)
+    ON DELETE CASCADE;
 
 -- Reference: credit_card_user (table: credit_card)
 ALTER TABLE credit_card ADD CONSTRAINT credit_card_user FOREIGN KEY credit_card_user (user_id)
-    REFERENCES client (id);
+    REFERENCES client (id)
+    ON DELETE CASCADE;
 
 ALTER TABLE credit_card ADD CONSTRAINT credit_card_savings_account FOREIGN KEY credit_card_savings_account (savings_account_id)
-    REFERENCES savings_account (id);
+    REFERENCES savings_account (id)
+    ON DELETE CASCADE;
 
 -- Reference: credit_guest (table: credit)
 ALTER TABLE credit ADD CONSTRAINT credit_guest FOREIGN KEY credit_guest (guest_email)
-    REFERENCES guest (email);
+    REFERENCES guest (email)
+    ON DELETE CASCADE;
 
 -- Reference: credit_user (table: credit)
 ALTER TABLE credit ADD CONSTRAINT credit_user FOREIGN KEY credit_user (user_id)
-    REFERENCES client (id);
+    REFERENCES client (id)
+    ON DELETE CASCADE;
 
 -- Reference: message_user (table: message)
 ALTER TABLE message ADD CONSTRAINT message_user FOREIGN KEY message_user (user_id)
-    REFERENCES client (id);
+    REFERENCES client (id)
+    ON DELETE CASCADE;
 
 -- Reference: savings_account_user (table: savings_account)
 ALTER TABLE savings_account ADD CONSTRAINT savings_account_user FOREIGN KEY savings_account_user (user_id)
-    REFERENCES client (id);
+    REFERENCES client (id)
+    ON DELETE CASCADE;
 
 -- Reference: transaction_savings_account (table: movement)
 ALTER TABLE movement ADD CONSTRAINT transaction_savings_account FOREIGN KEY transaction_savings_account (savings_account_id)
     REFERENCES savings_account (id) ON DELETE CASCADE;
-
 
 -- End of file.

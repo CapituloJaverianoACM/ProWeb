@@ -13,7 +13,6 @@ $client->id = $_POST['id'];
 if(isset($_POST['save'])) {
     $client->getClientById();
     $client->username = $_POST['username'];
-    $client->password = $_POST['password'];
     $client->isAdmin = $_POST['isAdmin'];
     $client->updateClient();
 }

@@ -8,6 +8,15 @@
 
   $credit = new CreditModel($db);
 
-  $credit->user_id = $_SESSION['user_id'];
+  if(isset($_SESSION['user_id'])) {
+      $credit->user_id = $_SESSION['user_id'];
 
-  $_SESSION['credits'] = $credit->getAllClientsCredits();
+      $_SESSION['credits'] = $credit->getAllClientsCredits();
+  }
+
+if(isset($_SESSION['guest_email'])) {
+    $credit->guest_email = $_SESSION['guest_email'];
+
+    $_SESSION['credits'] = $credit->getAllGuestCredits();
+}
+

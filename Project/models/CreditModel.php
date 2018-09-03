@@ -30,7 +30,6 @@
 
      /**
       * Gets all credits from a specific client.
-      * TODO: Only get aproved credits.
       */
       public function getAllClientsCredits() {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = :user_id';
@@ -134,6 +133,55 @@
        public function getUnAprovedCredits() {
            $query = 'SELECT * FROM ' . $this->table . ' WHERE isAproved = 0';
            $stmt = $this->conn->prepare($query);
+           $stmt->execute();
+           $result = Utility::stmtToArray($stmt);
+           return $result;
+       }
+
+       /**
+        * Gets all aproved credits
+        */
+       public function getAprovedCredits() {
+           $query = 'SELECT * FROM ' . $this->table . ' WHERE isAproved = 1 and id = :id';
+           $stmt = $this->conn->prepare($query);
+           $stmt->bindParam(':id', $this->id);
+           $stmt->execute();
+           $result = Utility::stmtToArray($stmt);
+           return $result;
+       }
+
+
+       /**
+        * Gets all aproved credits of a guest
+        */
+       public function getGuestAprovedCredits() {
+           $query = 'SELECT * FROM ' . $this->table . ' WHERE guest_email = :guest_email AND isAproved = 1';
+           $stmt = $this->conn->prepare($query);
+           $stmt->bindParam(':guest_email', $this->guest_email);
+           $stmt->execute();
+           $result = Utility::stmtToArray($stmt);
+           return $result;
+       }
+
+       /**
+        * Gets all client aproved credits of a guest
+        */
+       public function getClientsAprovedCredits() {
+           $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = :user_id AND isAproved = 1';
+           $stmt = $this->conn->prepare($query);
+           $stmt->bindParam(':user_id', $this->user_id);
+           $stmt->execute();
+           $result = Utility::stmtToArray($stmt);
+           return $result;
+       }
+
+       /**
+        * Gets all credits from a specific guest.
+        */
+       public function getAllGuestCredits() {
+           $query = 'SELECT * FROM ' . $this->table . ' WHERE guest_email = :guest_email';
+           $stmt = $this->conn->prepare($query);
+           $stmt->bindParam(':guest_email', $this->guest_email);
            $stmt->execute();
            $result = Utility::stmtToArray($stmt);
            return $result;

@@ -2,6 +2,9 @@
 include_once '../controllers/adminController.php';
 $credits = $_SESSION['all_credits'];
 $credit_cards = $_SESSION['all_credit_cards'];
+if(!$_SESSION['isAdmin']) {
+    header('Location: ../views/signin.php');
+}
 $jsScript = "";
 if (isset($_SESSION['response'])) {
     $jsScript .= '<script> alert("' . $_SESSION['response'] . '")</script>';
@@ -34,6 +37,7 @@ if (isset($_SESSION['response'])) {
         <a class="p-2 text-dark" href="./credits.php">Creditos</a>
         <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
         <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+        <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
     </nav>
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>
@@ -78,10 +82,15 @@ if (isset($_SESSION['response'])) {
         <div class="form-group">
             <label for="credit_id">Tasa Credito Para Visitantes</label>
             <input required class="form-control"  max="1.0" step=".01" name="guest_credit_fee" type="number" value="<?php echo number_format($_SESSION['guest_credit_fee'],2)?>" required>
+            <label for="credit_id">Tasa Interes Cuenta Ahorros</label>
+            <input required class="form-control"  max="1.0" step=".01" name="default_savings_interest" type="number" value="<?php echo number_format($_SESSION['default_savings_interest'],2)?>" required>
+            <label for="credit_id">Costo Transferencia Entre Bancos</label>
+            <input required class="form-control" name="transfer_cost" type="number" value="<?php echo number_format($_SESSION['transfer_cost'],2)?>" required>
         </div>
-        <button type="submit" class="submit-btn btn btn-primary">Actualizar Valor</button>
+        <button type="submit" name="admin_constants" class="submit-btn btn btn-primary">Actualizar Valor</button>
     </form>
     <a class="submit-btn btn btn-info" href="administrateClients.php" role="button">Administrar Usuarios</a>
+    <a class="submit-btn btn btn-success" href="administrateClients.php" role="button">Fin de Mes</a>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

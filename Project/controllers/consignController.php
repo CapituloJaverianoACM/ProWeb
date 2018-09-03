@@ -25,6 +25,12 @@
 
   $error = true;
 
+ if($_POST['amount'] < 0) {
+     $_SESSION['response'] = 'Monto no puede ser negativo';
+     $_POST = array();
+     header('Location: ../views/savingsAccount.php');
+ }
+
   if(isset($_POST['destiny_account_id'])) {
     $account_destiny->id = $_POST['destiny_account_id'];
     $account_destiny->getSavingAccountById();
@@ -45,7 +51,7 @@
     $credit->id = $_POST['destiny_credit_id'];
     $credit->getCreditById();
     $movement->destiny = $credit->id;
-    if($account_origin->balance - $movement->amount >= 0) {
+    if($account_origin->balance - $movement->amount >= 0 && $credit->balance - $movement->amount >= 0) {
       $account_origin->balance -= $movement->amount;
       $credit->balance -= $movement->amount;
       $account_origin->updateAccount();
@@ -53,7 +59,7 @@
       $_SESSION['response'] = 'Retiro efectuado exitosamente';
       $error = false;
     } else {
-      $_SESSION['response'] = 'Saldo insuficiente';
+      $_SESSION['response'] = 'Saldo insuficiente o Sobrepagando Credito';
     }
   }
 
@@ -63,6 +69,7 @@
     $account_origin->balance += $movement->amount;
     $account_origin->updateAccount();
     $_SESSION['response'] = 'Consignacion efectuado exitosamente';
+    $error = false;
   }
 
   if( !$error )

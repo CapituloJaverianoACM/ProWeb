@@ -21,7 +21,6 @@
      */
     function __construct($db) {
       $this->conn = $db;
-      $this->interest_rate = 0.02; // TODO: Change to admin's rate.
     }
 
     /**

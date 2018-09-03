@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,6 +22,7 @@
           <a class="p-2 text-dark" href="./credits.php">Creditos</a>
           <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
           <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+          <?php session_start(); if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
       </nav>
       <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
     </div>
@@ -54,7 +56,7 @@
                             <div class="form-group row">
                                 <div class="col-xs-4">
                                     <label for="inputDate">Fecha de pago</label>
-                                    <input required class="form-control"  name="pay_date" id="date" type="date" >
+                                    <input required class="form-control"  name="pay_date" placeholder="AAAA-MM-DD" id="date" type="date" >
                                 </div>
                             </div>
                         </div>

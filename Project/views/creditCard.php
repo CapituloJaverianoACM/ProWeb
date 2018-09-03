@@ -1,8 +1,8 @@
 <?php
   include_once '../controllers/creditCardController.php';
   $credit_cards = array();
-  if(isset($_SESSION['creditCards']))
-    $credit_cards = $_SESSION['creditCards'];
+  if(isset($_SESSION['all_credit_cards']))
+    $credit_cards = $_SESSION['all_credit_cards'];
   else "Error! ";
   $jsScript = "";
   if(isset($_SESSION['response'])) {
@@ -35,6 +35,7 @@
           <a class="p-2 text-dark" href="./credits.php">Creditos</a>
           <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
           <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
+          <?php if($_SESSION['isAdmin']) echo '<a class="p-2 text-dark" href="./admin.php">Admin</a>';?>
       </nav>
       <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
     </div>
@@ -54,12 +55,14 @@
             <th scope="col">Consumido</th>
             <th scope="col">Disponible</th>
             <th scope="col">Tasa de Interes</th>
+            <th scope="col">Aprobado</th>
           </tr>
         </thead>
         <tbody>
           <?php
           foreach ($credit_cards as $key => $value) {
             $diponible = $credit_cards[$key]['max_capacity'] - $credit_cards[$key]['consumed'];
+            $aprobado = ($credit_cards[$key]['isAproved'] == 1? "Si" : "No");
               echo '<tr>';
                 echo '<th scope="row">'.$credit_cards[$key]['id']."</th>";
                 echo "<td> $ ".number_format($credit_cards[$key]['max_capacity'],2)." JC </td>";
@@ -67,6 +70,7 @@
                 echo "<td>".number_format($credit_cards[$key]['consumed'],2)."</td>";
                 echo "<td>".number_format($diponible,2)."</td>";
                 echo "<td>".number_format($credit_cards[$key]['interest_rate'],2)."</td>";
+                echo "<td>".$aprobado."</td>";
               echo '</tr>';
           }
           ?>

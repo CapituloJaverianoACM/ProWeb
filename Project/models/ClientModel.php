@@ -100,14 +100,11 @@
         $query = 'UPDATE ' . $this->table .
             ' SET 
                 username = :username, 
-                password = :password,
                 isAdmin = :isAdmin
              WHERE 
                 id = :id';
         $stmt = $this->conn->prepare($query);
-        $hash = password_hash($this->password, PASSWORD_DEFAULT);
         $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':password', $hash);
         $stmt->bindParam(':isAdmin', $this->isAdmin);
         $stmt->bindParam(':id', $this->id);
         if($stmt->execute()) return true;

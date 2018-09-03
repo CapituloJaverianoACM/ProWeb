@@ -12,5 +12,8 @@
   $client->password = $_POST['password'];
 
   // TODO: Redirect page.
-  if($client->createClient()) echo 'Cliente creado exitosamente';
-  else echo 'Error al crear el cliente';
+  if($client->createClient()) {
+      header('Location: ../views/signin.php');
+  } else {
+      echo 'Error al crear el cliente';
+  }

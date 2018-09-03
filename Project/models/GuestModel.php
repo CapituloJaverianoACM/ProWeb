@@ -47,4 +47,29 @@ class GuestModel {
         return false;
     }
 
+    /**
+     * Gets the guest by email
+     */
+
+    public function getGuestByEmail() {
+        $query = 'SELECT * FROM ' . $this->table . 'WHERE email = :email';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->execute();
+        $result = Utility::stmtToArray($stmt);
+        return $result;
+    }
+
+    /**
+     * Checks if the guest is alrready registered
+     */
+    public function isEmailRegister() {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->execute();
+        $result = Utility::stmtToArray($stmt);
+        return count($result) > 0;
+    }
+
 }
