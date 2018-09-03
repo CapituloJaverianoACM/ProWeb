@@ -90,7 +90,7 @@ if (isset($_SESSION['response'])) {
         <button type="submit" name="admin_constants" class="submit-btn btn btn-primary">Actualizar Valor</button>
     </form>
     <a class="submit-btn btn btn-info" href="administrateClients.php" role="button">Administrar Usuarios</a>
-    <a class="submit-btn btn btn-success" href="administrateClients.php" role="button">Fin de Mes</a>
+    <a class="submit-btn btn btn-success" href="../controllers/endMonthController.php" role="button">Fin de Mes</a>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
