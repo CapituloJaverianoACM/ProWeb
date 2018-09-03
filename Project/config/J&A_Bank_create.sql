@@ -115,7 +115,7 @@ ALTER TABLE savings_account ADD CONSTRAINT savings_account_user FOREIGN KEY savi
 
 -- Reference: transaction_savings_account (table: movement)
 ALTER TABLE movement ADD CONSTRAINT transaction_savings_account FOREIGN KEY transaction_savings_account (savings_account_id)
-    REFERENCES savings_account (id);
+    REFERENCES savings_account (id) ON DELETE CASCADE;
 
 
 -- End of file.

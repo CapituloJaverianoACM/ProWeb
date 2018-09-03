@@ -27,7 +27,10 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-
+    /**
+     * Verify if all params are send
+     *
+     */
 
     if( !array_key_exists("amount",$data) || !array_key_exists("origin_bank",$data) || !array_key_exists("origin_account_id",$data))
     {
@@ -38,7 +41,10 @@
 
     }
     else{
-
+        /**
+         * Create a temp movement with data in JSON
+         *
+         */
 
         $movement->amount = $data->amount;
         $movement->foreign_account_id = $data->origin_account_id;
@@ -48,10 +54,16 @@
 
         $error_params = true;
 
+
+        /**
+         *  Define if send to a accout or credits
+         */
         if(isset($data->destiny_account_id)){
 
             $account_destiny->id = $movement->destiny;
             $account_destiny->getSavingAccountById();
+
+
 
             if( $account_destiny->user_id == null )
             {
@@ -103,10 +115,17 @@
 
         }
 
+
+        /**
+         * verify if all params are good, and create the movement in db
+         */
         if (!$error_params)
             $movement->createMovement();
 
 
+        /**
+         * Return the JSON
+         */
         echo json_encode(
             array('message' => $message)
         );
