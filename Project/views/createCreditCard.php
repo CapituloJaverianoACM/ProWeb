@@ -1,7 +1,9 @@
 <?php
   session_start();
   $username = (isset($_SESSION['username']) ? $_SESSION['username'] : 'Error' );
-?>
+    include_once '../controllers/savingsAccountController.php';
+    $accounts = $_SESSION['savings_accounts'];
+  ?>
 
 <!doctype html>
 <html lang="en">
@@ -33,7 +35,7 @@
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">Tarjeta de credito</h1>
       <p class="lead">¡Bienvenido <?php echo $username; ?>! Para solicitar tu tarjeta de credito solo debes ingresar
-        la capacidad maxima de tu tarjeta.</p>
+        la capacidad maxima de tu tarjeta y la cuenta a la que la vas a asociar.</p>
     </div>
 
     <div class="container">
@@ -47,7 +49,26 @@
               <form class="form-signin" method="post" action="../controllers/createCreditCardController.php">
                 <label for="exampleFormControlInput1">Ingresa el cupo que desea para su tarjeta de credito.</label>
               <input type="number" class="form-control"  name="max_capacity" placeholder="Cupo" required> <br>
-              <button class="btn btn-lg btn-primary btn-block" type="submit">Solicitar Tarjeta</button>
+
+
+                      <div class="row">
+
+                          <div class="col-12">
+                              <select placeholder="Cuenta de Ahorros" name="account_id" class="form-control" id="sel1" required>
+                                  <?php
+                                  foreach ($accounts as $key => $value) {
+                                      $id = $value['id'];
+                                      echo '<option>'. $id .'</option>';
+                                  }
+                                  ?>
+                              </select>
+                          </div>
+
+                      </div>
+
+                  <br>
+
+                  <button class="btn btn-lg btn-primary btn-block" type="submit">Solicitar Tarjeta</button>
             </form>
               </div>
             </div>
@@ -56,6 +77,7 @@
 
           </div>
         </div>
+
     </div>
 
     <!-- Optional JavaScript -->

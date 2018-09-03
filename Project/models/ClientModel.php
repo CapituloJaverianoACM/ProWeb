@@ -1,5 +1,6 @@
 <?php
-include_once 'Utility.php';
+
+    include_once 'Utility.php';
 
   /**
    * Class that represents the table client in the data base.
