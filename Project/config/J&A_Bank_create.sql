@@ -36,6 +36,7 @@ CREATE TABLE credit_card (
     interest_rate decimal(40,10) NOT NULL,
     id int NOT NULL AUTO_INCREMENT,
     user_id int NOT NULL,
+    savings_account_id int NOT NULL,
     CONSTRAINT credit_card_pk PRIMARY KEY (id)
 );
 
@@ -96,6 +97,9 @@ ALTER TABLE credit_card_purchase ADD CONSTRAINT credit_card_purchase_credit_card
 -- Reference: credit_card_user (table: credit_card)
 ALTER TABLE credit_card ADD CONSTRAINT credit_card_user FOREIGN KEY credit_card_user (user_id)
     REFERENCES client (id);
+
+ALTER TABLE credit_card ADD CONSTRAINT credit_card_savings_account FOREIGN KEY credit_card_savings_account (savings_account_id)
+    REFERENCES savings_account (id);
 
 -- Reference: credit_guest (table: credit)
 ALTER TABLE credit ADD CONSTRAINT credit_guest FOREIGN KEY credit_guest (guest_email)

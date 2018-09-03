@@ -1,5 +1,5 @@
 <?php
-
+    include_once 'Utility.php';
   /**
    * Class that represents the table client in the data base.
    * this class retrives and writes to the DB.
@@ -30,7 +30,8 @@
        $query = 'SELECT * FROM ' . $this->table;
        $stmt = $this->conn->prepare($query);
        $stmt->execute();
-       return $stmt->fetch(PDO::FETCH_ASSOC);;
+       $result = Utility::stmtToArray($stmt);
+       return $result;
      }
 
      /**

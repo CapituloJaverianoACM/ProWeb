@@ -18,6 +18,7 @@
     public $user_id;
     public $consumed;
     public $isAproved;
+    public $savings_account_id;
 
     /**
      * Receives a Database object for the class to have
@@ -63,7 +64,8 @@
                   handling_fee = :handling_fee,
                   interest_rate= :interest_rate,
                   user_id = :user_id,
-                  consumed = :consumed';
+                  consumed = :consumed,
+                  savings_account_id = :savings_account_id';
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':max_capacity', $this->max_capacity);
       $stmt->bindParam(':overbook', $this->overbook);
@@ -71,6 +73,7 @@
       $stmt->bindParam(':interest_rate', $this->interest_rate);
       $stmt->bindParam(':user_id', $this->user_id);
       $stmt->bindParam(':consumed', $this->consumed);
+        $stmt->bindParam(':savings_account_id', $this->savings_account_id);
       if($stmt->execute()) return true;
       printf("Error: %s.\n", $stmt->error);
       return false;

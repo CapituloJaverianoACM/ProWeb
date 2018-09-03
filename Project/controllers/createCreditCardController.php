@@ -11,6 +11,7 @@
 
   $credit_card->user_id = $_SESSION['user_id'];
   $credit_card->max_capacity = $_POST['max_capacity'];
+  $credit_card->savings_account_id = $_POST['account_id'];
   $credit_card->overbook = 0;
   $credit_card->handling_fee = 0;
   $credit_card->interest_rate = 0;

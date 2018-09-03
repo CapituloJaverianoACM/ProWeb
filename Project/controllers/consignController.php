@@ -28,6 +28,7 @@
   if(isset($_POST['destiny_account_id'])) {
     $account_destiny->id = $_POST['destiny_account_id'];
     $account_destiny->getSavingAccountById();
+    $movement->destiny = $account_destiny->id;
     if($account_origin->balance - $movement->amount >= 0) {
       $account_origin->balance -= $movement->amount;
       $account_destiny->balance += $movement->amount;
@@ -43,6 +44,7 @@
   if(isset($_POST['destiny_credit_id'])) {
     $credit->id = $_POST['destiny_credit_id'];
     $credit->getCreditById();
+    $movement->destiny = $credit->id;
     if($account_origin->balance - $movement->amount >= 0) {
       $account_origin->balance -= $movement->amount;
       $credit->balance -= $movement->amount;

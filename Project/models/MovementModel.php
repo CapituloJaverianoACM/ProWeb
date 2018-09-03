@@ -60,4 +60,34 @@
 
     }
 
+      /**
+       * Gets all client movements .
+       */
+      public function getAllClientsMovements($user_id) {
+          $query = '
+            (
+            SELECT movement.*
+            FROM client
+            INNER JOIN savings_account ON client.id = savings_account.user_id
+            INNER JOIN movement ON(savings_account.id = movement.savings_account_id OR savings_account.id = movement.destiny)
+            WHERE client.id = :user_id
+            ) 
+            UNION
+            (
+            SELECT movement.*    
+            FROM client
+            INNER JOIN credit ON client.id = credit.user_id
+            INNER JOIN movement ON credit.id = movement.destiny
+            WHERE client.id = :user_id2
+            )';
+
+
+          $stmt = $this->conn->prepare($query);
+          $stmt->bindParam(':user_id', $user_id);
+          $stmt->bindParam(':user_id2', $user_id);
+          $stmt->execute();
+          $result = Utility::stmtToArray($stmt);
+          return $result;
+      }
+
   }
