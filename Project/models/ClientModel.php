@@ -45,7 +45,7 @@ include_once 'Utility.php';
        $stmt->bindParam(1, $this->username);
        $stmt->execute();
        $result = Utility::stmtToArray($stmt)[0];
-       $this->password = $result['password'];
+       //$this->password = $result['password'];
        $this->isAdmin = $result['isAdmin'];
        $this->id = $result['id'];
        return $result;
@@ -87,6 +87,9 @@ include_once 'Utility.php';
       */
     public function checkUserLogin() {
       $fetchedUser = $this->getClientByUsername();
+      print_r($fetchedUser);
+      print_r("<br>");
+      print_r($this->password);
       $trueHash = $fetchedUser['password'];
       $this->id = $fetchedUser['id'];
       return password_verify($this->password, $trueHash);

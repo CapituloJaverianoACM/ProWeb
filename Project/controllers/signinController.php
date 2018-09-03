@@ -18,12 +18,11 @@ $_SESSION['guest_credit_fee'] = $admin_constant->getGuestCreditFee();
 if (isset($_POST['client']) and $_POST['username'] != null) {
     $client->username = $_POST['username'];
     $client->password = $_POST['password'];
+    print_r($_POST);
     if ($client->checkUserLogin()) {
-        if (!isset($_SESSION['username'])) {
-            $_SESSION['username'] = $client->username;
-            $_SESSION['user_id'] = $client->id;
-            $_SESSION['isAdmin'] = $client->isAdmin;
-        }
+        $_SESSION['username'] = $client->username;
+        $_SESSION['user_id'] = $client->id;
+        $_SESSION['isAdmin'] = $client->isAdmin;
         header('Location: ../views/profile.php');
     } else {
         echo 'Access Denied';
