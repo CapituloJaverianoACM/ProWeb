@@ -73,6 +73,13 @@ if (isset($_SESSION['response'])) {
         </div>
         <button type="submit" class="submit-btn btn btn-warning">Ver Solicitud</button>
     </form>
+    <form class="form" action="../controllers/adminController.php" method="post">
+        <div class="form-group">
+            <label for="credit_id">Tasa Credito Para Visitantes</label>
+            <input required class="form-control"  max="1.0" step=".01" name="guest_credit_fee" type="number" value="<?php echo number_format($_SESSION['guest_credit_fee'],2)?>" required>
+        </div>
+        <button type="submit" class="submit-btn btn btn-primary">Actualizar Valor</button>
+    </form>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
