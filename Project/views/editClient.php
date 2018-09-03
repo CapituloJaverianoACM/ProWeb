@@ -1,9 +1,8 @@
 <?php
 session_start();
-$credit = $_SESSION['credit_aprove'];
-print_r($credit);
+$username_to_edit = $_SESSION['user_to_edit'];
+//unset($_SESSION['user_to_edit']);
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +15,7 @@ print_r($credit);
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="./css/makePurchase.css">
-    <title>Solicitud Credito</title>
+    <title>Edit Client</title>
 </head>
 <body>
 
@@ -33,69 +32,52 @@ print_r($credit);
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Revisar Solicitud de Credito</h1>
-    <p class="lead">Revisa los campos para aprobar el siguente credito.</p>
+    <h1 class="display-4">Pricing</h1>
+    <p class="lead">Edita los campos del usuario.</p>
 </div>
 
 <div class="container">
-    <form action="../controllers/creditApplicationController.php" method="post">
+    <form action="../controllers/editClientController.php" method="post">
         <div class="form-group">
-            <label for="max_capacity">ID de Credito</label>
-            <input readonly type="number" class="form-control" name="id" value="<?php echo $credit['id']; ?>" required>
+            <label for="id">ID Cliente</label>
+            <input readonly type="number" name="id" class="form-control" value="<?php echo $username_to_edit['id']; ?>" required>
         </div>
         <div class="form-group">
-            <label for="max_capacity">Fecha de Pago</label>
-            <input type="date" class="form-control" name="pay_date" value="<?php echo $credit['pay_date']; ?>" required>
+            <label for="username">Username</label>
+            <input type="text" name="username" form-control" value="<?php echo $username_to_edit['username']; ?>" required>
         </div>
         <div class="form-group">
-            <label for="max_capacity">Monto</label>
-            <input type="number" class="form-control" name="loan_amount" value="<?php echo number_format($credit['loan_amount'],2, '.', ''); ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="max_capacity">Interes de Mora</label>
-            <input type="number" step="0.01" class="form-control" name="late_payment_fee" value="<?php echo number_format($credit['late_payment_fee'],2, '.', ''); ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="max_capacity">Tasa Interes</label>
-            <input type="number" class="form-control" step="0.01" name="interest_rate" value="<?php echo number_format($credit['interest_rate'],2, '.', ''); ?>" required>
+            <label for="username">Password</label>
+            <input type="password"  name="password" class="form-control" value="<?php echo $username_to_edit['password']; ?>" required>
         </div>
 
-        <?php
-            if(isset($credit['guest_email'])) {
-                $html = ' 
-                    <div class="form-group">
-                        <label for="max_capacity">Email del Dueño</label>
-                        <input readonly type="email" class="form-control" name="guest_email" value="' .$credit['guest_email']. '"required>
-                    </div>';
-                echo $html;
-            } else {
-                $html = ' 
-                    <div class="form-group">
-                        <label for="max_capacity">ID del Dueño</label>
-                        <input readonly type="number" class="form-control" name="user_id" value="' .$credit['user_id']. '"required>
-                    </div>';
-                echo $html;
-            }
-        ?>
         <div class="row">
             <div class="col-6">
                 <div class="form-check text-center">
-                    <input class="form-check-input" type="radio" name="isAproved" id="exampleRadios1" value="0">
+                    <input class="form-check-input" type="radio" name="isAdmin" id="exampleRadios1" value="1" <?php echo ($username_to_edit['isAdmin'] ? 'checked' : '')?>>
                     <label class="form-check-label" for="exampleRadios1">
-                        No Aprovado
+                        Administrador
                     </label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-check text-center">
-                    <input class="form-check-input" type="radio" name="isAproved" id="exampleRadios2" value="1" checked>
+                    <input class="form-check-input" type="radio" name="isAdmin" id="exampleRadios2" value="0" <?php echo ($username_to_edit['isAdmin'] ? '' : 'checked')?> >
                     <label class="form-check-label" for="exampleRadios2">
-                        Aprovado
+                        Regular
                     </label>
                 </div>
             </div>
         </div>
-        <button type="submit" class="submit-btn btn btn-success">Confirmar</button>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" name="save" class="submit-btn btn btn-success">Confirmar</button>
+            </div>
+            <div class="col-6">
+                <button type="submit" name="delete" class="submit-btn btn btn-danger">Eliminar</button>
+            </div>
+        </div>
+
     </form>
 </div>
 <!-- Optional JavaScript -->

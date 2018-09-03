@@ -1,3 +1,9 @@
+<?php
+include_once '../controllers/administrateClientsController.php';
+$all_clients = $_SESSION['all_clients'];
+unset($_SESSION['all_clients']);
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,8 +14,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/savingsAccount.css">
 
-    <title>Create Savings Account</title>
+    <title>Administrate Users</title>
 </head>
 <body>
 
@@ -26,13 +33,28 @@
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Pricing</h1>
-    <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example.
-        It's built with default Bootstrap components and utilities with little customization.</p>
+    <h1 class="display-4">Administrar Usuarios</h1>
+    <p class="lead">Selecciona el usuario que quieres administrar.</p>
 </div>
 
 <div class="container">
-
+    <form class="form" action="../controllers/administrateClientsController.php" method="post">
+        <div class="row">
+            <div class="col-8 form-group">
+                <select placeholder="ID del Usuario" name="username" class="form-control" id="sel1" required>
+                    <?php
+                    foreach ($all_clients as $key => $value) {
+                        $id = $value['username'];
+                        echo '<option>'. $id .'</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <button type="submit" class="submit-btn btn btn-warning">Administrar</button>
+            </div>
+        </div>
+    </form>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

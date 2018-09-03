@@ -18,18 +18,20 @@ $accounts = $_SESSION['all_savings_accounts'];
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/savingsAccount.css">
 
-    <title>Create Savings Account</title>
+    <title>Administrate Savings Account</title>
 </head>
 <body>
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">J&A Bank</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">Features</a>
-        <a class="p-2 text-dark" href="#">Enterprise</a>
-        <a class="p-2 text-dark" href="#">Support</a>
-        <a class="p-2 text-dark" href="#">Pricing</a>
+        <a class="p-2 text-dark" href="./profile.php">Perfil</a>
+        <a class="p-2 text-dark" href="./savingsAccount.php">Cuenta de Ahorros</a>
+        <a class="p-2 text-dark" href="./credits.php">Creditos</a>
+        <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
+        <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
     </nav>
     <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
 </div>

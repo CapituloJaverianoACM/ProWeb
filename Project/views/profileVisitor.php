@@ -1,10 +1,10 @@
 <?php
-  session_start();
-  $username = (isset($_SESSION['username']) ? $_SESSION['username'] : 'Error' );
-    include_once '../controllers/savingsAccountController.php';
-    $accounts = $_SESSION['savings_accounts'];
-  ?>
-
+if(isset($_SESSION['response'])) {
+    $jsScript .= '<script> alert("' .$_SESSION['response']. '")</script>';
+    echo $jsScript;
+    unset($_SESSION['response']);
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,55 +29,35 @@
           <a class="p-2 text-dark" href="./creditCard.php">Tarjetas de Creditos</a>
           <a class="p-2 text-dark" href="./messages.php">Mensajes</a>
       </nav>
-      <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Logout</a>
+      <a class="btn btn-outline-danger" href="../controllers/logoutController.php">Realizar Transferencia</a>
     </div>
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Tarjeta de credito</h1>
-      <p class="lead">¡Bienvenido <?php echo $username; ?>! Para solicitar tu tarjeta de credito solo debes ingresar
-        la capacidad maxima de tu tarjeta y la cuenta a la que la vas a asociar.</p>
+      <h1 class="display-4">J&A Bank</h1>
+      <p class="lead">¡Bienvenido, elige uno de los siguientes productos.</p>
     </div>
 
     <div class="container">
       <div class="row text-center">
-          <div class="col-lg-12">
+          <div class="col-lg-4">
+            <i class="fas fa-9x fa-piggy-bank ico-color-pig"></i>
+            <h2>Cuenta de Ahorros</h2>
+            <p>Con las Cuentas de ahorro de J&A Bank tienes más opciones para ahorrar y manejar tu dinero, registrate y pide la tuya, es fácil y rápido!</p>
+            <p><a class="btn btn-primary" href="../views/signup.php" role="button">Quiero registrame! &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <i class="fas fa-9x fa-dollar-sign ico-color-credit"></i>
+            <h2>Crédito</h2>
+            <p>Solicita aqui tu crédito con J&A Bank sin necesidad de estar registrado.</p><br>
+            <p><a class="btn btn-primary" href="../views/newCreditVisitor.php" role="button">View details &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
             <i class="fas fa-9x fa-credit-card ico-color-tc"></i>
-
-            <div class="col-sm-10 offset-sm-4 text-center">
-              <div class="form-group row">
-            <div class="col-xs-4">
-              <form class="form-signin" method="post" action="../controllers/createCreditCardController.php">
-                <label for="exampleFormControlInput1">Ingresa el cupo que desea para su tarjeta de credito.</label>
-              <input type="number" class="form-control"  name="max_capacity" placeholder="Cupo" required> <br>
-
-
-                      <div class="row">
-
-                          <div class="col-12">
-                              <select placeholder="Cuenta de Ahorros" name="account_id" class="form-control" id="sel1" required>
-                                  <?php
-                                  foreach ($accounts as $key => $value) {
-                                      $id = $value['id'];
-                                      echo '<option>'. $id .'</option>';
-                                  }
-                                  ?>
-                              </select>
-                          </div>
-
-                      </div>
-
-                  <br>
-
-                  <button class="btn btn-lg btn-primary btn-block" type="submit">Solicitar Tarjeta</button>
-            </form>
-              </div>
-            </div>
-          </div>
-
-
-          </div>
-        </div>
-
+            <h2>Tarjeta de Crédito</h2>
+            <p>Registrate y conoce las Tarjetas de Crédito J&A Bank y entérate de los beneficios que tenemos para ti.</p>
+            <p><a class="btn btn-primary" href="../views/signup.php" role="button">Quiero registrame! &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
     </div>
 
     <!-- Optional JavaScript -->

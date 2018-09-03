@@ -109,6 +109,7 @@
                      balance = :balance,
                      interest_rate = :interest_rate,
                      user_id = :user_id,
+                     guest_email = :guest_email,
                      pay_date = :pay_date,
                      loan_amount = :loan_amount,
                      late_payment_fee = :late_payment_fee,
@@ -121,6 +122,7 @@
          $stmt->bindParam(':loan_amount', $this->loan_amount);
          $stmt->bindParam(':late_payment_fee', $this->late_payment_fee);
          $stmt->bindParam(':isAproved', $this->isAproved);
+         $stmt->bindParam(':guest_email', $this->guest_email);
          if($stmt->execute()) return true;
          printf("Error: %s.\n", $stmt->error);
          return false;
