@@ -16,6 +16,7 @@
     if(!isset($_SESSION['username'])) {
       $_SESSION['username'] = $client->username;
       $_SESSION['user_id'] = $client->id;
+      $_SESSION['rate_credit_guest'] = 0.03;
     }
     header('Location: ../views/profile.php');
   } else {

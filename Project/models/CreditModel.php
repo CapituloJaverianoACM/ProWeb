@@ -58,11 +58,21 @@
       public function updateCredit() {
         $query = 'UPDATE ' . $this->table . '
                   SET
-                    balance = :balance
+                    balance = :balance,
+                    interest_rate = :interest_rate,
+                    pay_date = :pay_date,
+                    loan_amount = :loan_amount,
+                    isAproved = :isAproved,
+                    late_payment_fee = :late_payment_fee              
                   WHERE
                     id = :id';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':balance', $this->balance);
+        $stmt->bindParam(':interest_rate', $this->interest_rate);
+        $stmt->bindParam(':pay_date', $this->pay_date);
+        $stmt->bindParam(':loan_amount', $this->loan_amount);
+        $stmt->bindParam(':isAproved', $this->isAproved);
+        $stmt->bindParam(':late_payment_fee', $this->late_payment_fee);
         $stmt->bindParam(':id', $this->id);
         if($stmt->execute()) return true;
         printf("Error: %s.\n", $stmt->error);
@@ -114,5 +124,16 @@
          if($stmt->execute()) return true;
          printf("Error: %s.\n", $stmt->error);
          return false;
+       }
+
+       /**
+        * Gets all unaproved credits
+        */
+       public function getUnAprovedCredits() {
+           $query = 'SELECT * FROM ' . $this->table . ' WHERE isAproved = 0';
+           $stmt = $this->conn->prepare($query);
+           $stmt->execute();
+           $result = Utility::stmtToArray($stmt);
+           return $result;
        }
    }

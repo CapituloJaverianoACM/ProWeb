@@ -70,4 +70,6 @@
       $this->id = $fetchedUser['id'];
       return password_verify($this->password, $trueHash);
     }
+
+
   }

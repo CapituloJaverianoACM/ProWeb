@@ -106,7 +106,8 @@
                   handling_fee = :handling_fee,
                   interest_rate= :interest_rate,
                   user_id = :user_id,
-                  consumed = :consumed
+                  consumed = :consumed,
+                  isAproved = :isAproved
                 WHERE
                   id = :id';
       $stmt = $this->conn->prepare($query);
@@ -117,9 +118,23 @@
       $stmt->bindParam(':user_id', $this->user_id);
       $stmt->bindParam(':consumed', $this->consumed);
       $stmt->bindParam(':id', $this->id);
+      $stmt->bindParam(':isAproved', $this->isAproved);
       if($stmt->execute()) return true;
       printf("Error: %s.\n", $stmt->error);
       return false;
+    }
+
+    /**
+     * Gets the un aproved credit cards.
+     */
+
+    public function getUnAprovedCreditCards() {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE isAproved = 0';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = Utility::stmtToArray($stmt);
+        return $result;
+
     }
 
   }
