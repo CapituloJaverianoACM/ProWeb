@@ -1,3 +1,12 @@
+<?php
+$jsScript = "";
+if (isset($_SESSION['response'])) {
+    $jsScript .= '<script> alert("' . $_SESSION['response'] . '")</script>';
+    echo $jsScript;
+    unset($_SESSION['response']);
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

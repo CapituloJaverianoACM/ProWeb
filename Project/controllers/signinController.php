@@ -25,7 +25,7 @@ if (isset($_POST['client']) and $_POST['username'] != null) {
         $_SESSION['isAdmin'] = $client->isAdmin;
         header('Location: ../views/profile.php');
     } else {
-        echo 'Access Denied';
+        header('Location: ../views/signin.php');
     }
 }
 

@@ -1,6 +1,7 @@
 <?php
   include_once '../controllers/savingsAccountController.php';
   $accounts = $_SESSION['all_savings_accounts'];
+  $client_accounts = $_SESSION['savings_accounts'];
   $credits = $_SESSION['client_credits'];
  ?>
 
@@ -45,7 +46,7 @@
             <label for="origin">Cuenta de Ahorros Origen</label>
             <select name="origin_account_id" class="form-control" id="origin" required>
               <?php
-                foreach ($accounts as $key => $value) {
+                foreach ($client_accounts as $key => $value) {
                   $id = $value['id'];
                   echo '<option>'. $id .'</option>';
                 }
@@ -71,7 +72,7 @@
             <label for="origin">Cuenta de Ahorros Origen</label>
             <select name="origin_account_id" class="form-control" id="origin" required>
               <?php
-                foreach ($accounts as $key => $value) {
+                foreach ($client_accounts as $key => $value) {
                   $id = $value['id'];
                   echo '<option>'. $id .'</option>';
                 }
@@ -92,7 +93,7 @@
           </form>
         </div>
         <div class="col-4">
-          <h2>Consignacións</h2>
+          <h2>Consignaciones</h2>
           <form action="../controllers/consignController.php" method="post">
             <label for="origin">Consignar Dinero</label>
             <label for="amount">Monto a Consignar</label>
