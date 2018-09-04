@@ -44,7 +44,7 @@
        * Gets all credits.
        */
        public function getAllCredits() {
-         $query = 'SELECT * FROM ' . $this->table;
+         $query = 'SELECT * FROM ' . $this->table . " WHERE balance > 0";
          $stmt = $this->conn->prepare($query);
          $stmt->execute();
          $result = Utility::stmtToArray($stmt);

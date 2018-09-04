@@ -27,7 +27,7 @@
      * Gets all clinets accounts.
      */
     public function getAllClientsAccounts() {
-      $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = :user_id';
+      $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = :user_id ORDER by balance DESC';
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':user_id', $this->user_id);
       $stmt->execute();
@@ -111,6 +111,19 @@
         $stmt->bindParam(':id', $this->id);
         if($stmt->execute()) return true;
         return false;
+    }
+
+    /**
+     * Gets the sum of all of the client's accounts
+     */
+
+    public function getClientTotalMoney() {
+        $query = 'SELECT SUM(balance) AS total_money FROM ' . $this->table . ' WHERE user_id = :user_id';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->execute();
+        $result = Utility::stmtToArray($stmt)[0]['total_money'];
+        return $result;
     }
 
   }
