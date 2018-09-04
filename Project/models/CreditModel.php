@@ -186,4 +186,14 @@
            $result = Utility::stmtToArray($stmt);
            return $result;
        }
+
+       public function updateLoanAmount() {
+           $query = 'UPDATE ' . $this->table . ' SET loan_amount = loam_amount * late_payment_fee'
+               .'WHERE guest_email = :guest_email';
+           $stmt = $this->conn->prepare($query);
+           $stmt->bindParam(':email', $this->email);
+           $stmt->execute();
+           $result = Utility::stmtToArray($stmt);
+           return count($result) > 0;
+       }
    }

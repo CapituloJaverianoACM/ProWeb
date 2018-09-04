@@ -3,7 +3,10 @@ session_start();
 include_once '../config/Database.php';
 include_once '../models/CreditCardModel.php';
 include_once '../models/CreditModel.php';
+include_once '../models/GuestModel.php';
 include_once '../models/SavingsAccountModel.php';
+
+const fecha_corte = ['31-01-2018', '28-02-2018', '31-03-2018', '30-04-2018', '31-05-2018', '30-06-2018', '31-07-2018', '31-08-2018', '29-09-2018', '31-10-2018', '30-11-2018', '31-12-2018'];
 
 // Instantiate DB & connect
 $database = new Database();
@@ -16,6 +19,10 @@ $credit = new CreditModel($db);
 chargeCreditCardHandlingFee();
 payInterestToSavingsAccounts();
 payCredits();
+verifyNonPaidCredits();
+$_SESSION['response'] = "Fin de mes realizado!";
+header('Location: ../views/admin.php');
+
 
 function chargeCreditCardHandlingFee() {
     global $credit_card, $db;
@@ -79,5 +86,50 @@ function payCredits() {
         }
         echo '<br>';
     }
+    function verifyNonPaidCredits() {
+        require_once('../PHPMailer_5.2.4/class.phpmailer.php');
+        include("../PHPMailer_5.2.4/class.smtp.php");
+        $corte_dt = new DateTime(fecha_corte[9]);
+        $database = new Database();
+        $db = $database->connect();
+        $credit = new CreditModel($db);
+        $updateCredit = new CreditModel($db);
+        $guest = new GuestModel($db);
+        foreach($guest->getAllGuests() as $value){
+            $credit->guest_email = $value['email'];
+            foreach($credit->getGuestAprovedCredits() as $row){
+                if($row['pay_date'] <= $corte_dt && $row['balance'] == 0){
+                }
+                //Falta cuando el cliente pago despues de la fecha de pago pero antes de fin de mes
+                else if ($row['pay_date'] > $corte_dt && $row['balance'] != 0) {
+                    $updateCredit->guest_email= $row['email'];
+                    $updateCredit->updateLoanAmount();
+                    $mail  = new PHPMailer();
+                    $body = "Buen día, a la fecha de corte usted aun no registra pago por su crédito, en J&A Bank,
+                se aplicarán cargos de mora, te aconcejamos cancelar su crédito lo más pronto posible
+                Cordialmente : El equipo de J&A Bank";
+                    $mail->IsSMTP();
+                    $mail->SMTPDebug  = 0;
+                    $mail->SMTPAuth = true;
+                    $mail->SMTPSecure = "ssl";
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->Port = 465 ;
+                    $mail->Username = "juantester007@gmail.com";
+                    $mail->Password = "juandavid1@";
+                    $mail->SetFrom('juantester007@gmail.com', 'Juan David Orozco');
+                    $mail->Subject = "Crédito en Mora";
+                    $mail->Body = $body ;
+                    $mail->AddAddress($value['email'], "Apreciado".' '." Cliente");
+                    if(!$mail->Send()) {
+                        echo "Error !! -> " . $mail->ErrorInfo;
+                    } else {
+                        echo "Correo enviado con exito";
+                    }
+
+                }
+            }
+        }
+    }
 }
+
 
